@@ -1,0 +1,309 @@
+<html>
+    <head>
+        <title>
+            Project
+        </title>
+    </head>
+
+    <body background="./back.jpg" >
+        <div style="display: flex; " >
+             <img src="./pro.png" alt="" style=" width: 70px; height: 50px"> 
+            <input class="op" type="text";  style=" width: 450px; margin-left: 450px; height: 50px; border-style: none; border-radius: 10px; " placeholder="Search">
+            <button class="btn" style="height: 50px; border-style: none; border-radius: 10px; margin-left: 10px;">Search</button>
+            <button style="margin-left: 360px; background-color: red; border: white; border-style: none; border-radius: 10px;">Reset</button>
+        </div>
+
+        <div style="margin-top: 50; margin-left: 700; " class="ah">
+            
+        </div>
+        <div style="margin-top: 210px;  height: 100px; display: flex; align-items: stretch; ">
+            <div class="mon" style="  width: 200px; visibility: hidden; border-radius: 20px; height: 300px; ">Hello</div>
+            <div class="tue" style=" background-color: blue; width: 200px; visibility: hidden; border-radius: 20px; height: 300px; ">hello</div>
+            <div class="wed" style="background-color: chartreuse; width: 200px; visibility: hidden; border-radius: 20px; height: 300px; ">hello</div>
+            <div class="thus"  style="background-color: pink ; width: 200px; visibility: hidden; border-radius: 20px; height: 300px; ">hello</div>
+            <div class="fri" style=" background-color: brown; width: 200; visibility: hidden; border-radius: 20px; height: 300px; ">hello</div>
+            <div class="sat" style="background-color: orange; width: 200; visibility: hidden; border-radius: 20px; height: 300px;">hello</div>
+            <div class="sun" style="background-color: purple ; margin-right: 0; width: 200px; visibility: hidden; border-radius: 20px; height: 300px; ">hello</div>
+            <div class="las" style="background-color: green ;margin-right: 0; width: 200px; visibility: hidden; border-radius: 20px; height: 300px;   ">hello</div>
+           
+        </div>
+    </body>
+
+    <script>
+        const btn=document.querySelector(".btn");
+       const inp= document.querySelector('.op');
+       btn.addEventListener("click",f);
+       
+    async   function f(){
+        const d=new Date();
+       let time=d.getHours();
+       console.log(typeof(time));
+      
+    const c=inp.value;
+    console.log(c);
+    const name=await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${c}&appid=7a17bc0a25a48c3c1e744ca0cfc675c1`);
+    const n=await name.json();
+    const lat=n.city.coord.lat;
+    const lon=n.city.coord.lon;
+    const res= await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=7a17bc0a25a48c3c1e744ca0cfc675c1`,{method:"GET"});
+    const a = await res.json();
+    console.log(a);
+    const l=a.list;
+    console.log(l[0].main.temp);
+    console.log(l[1].main.temp);
+    console.log(l[2].main.temp);
+    const w=l[0].weather;
+    const w1=l[1].weather;
+    const w2=l[2].weather;
+    const w3=l[3].weather;
+    const w4=l[4].weather;
+    const w5=l[5].weather;
+    const w6=l[6].weather;
+    const w7=l[7].weather;
+    console.log(typeof(w[0].description));
+    console.log(typeof(l[0].dt_txt));
+    
+    
+  const gen=document.querySelector('.ah');
+  gen.innerHTML=`<div style=' display: flex;'><div style="font-size: 60;  font-weight: 1000;">${Math.round(l[0].main.temp-273)}</div><div style='font-size: 40;  font-weight: 1000; margin-top:-15;'>.</div></div><p style='margin-left:-20; font-size:20 '>${w1[0].description}</p>`  
+ console.log(   l[0].main.temp-273);
+ const mon=document.querySelector('.mon');
+ const tue=document.querySelector('.tue');
+ const wed=document.querySelector('.wed');
+ const thus=document.querySelector('.thus');
+ const fri=document.querySelector('.fri');
+ const sat=document.querySelector('.sat');
+ const sun=document.querySelector('.sun');
+ const las=document.querySelector('.las');
+ mon.style.visibility='visible';
+ tue.style.visibility='visible';
+ wed.style.visibility='visible';
+ thus.style.visibility='visible';
+ fri.style.visibility='visible';
+ sat.style.visibility='visible';
+ sun.style.visibility='visible';
+ las.style.visibility='visible';
+
+ mon.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; ">${Math.round(l[0].main.temp-273)}<p style="margin-top:0px;">.</p> </div><p style="margin-left: 40px; font-weight:1000;">Humidity:${l[0].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000;">${w[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[0].dt_txt}</p>`;
+ tue.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; ">${Math.round(l[1].main.temp-273)}<p style="margin-top:0px;">.</p></div><p style="margin-left: 40px;">Humidity:${l[1].main.humidity}%</p><p style="margin-left: 40px;">${w1[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[1].dt_txt}</p>`;
+ wed.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; ">${Math.round(l[2].main.temp-273)}<p style="margin-top:0px;">.</p></div><p style="margin-left: 40px;">Humidity:${l[2].main.humidity}%</p><p style="margin-left: 40px;">${w2[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[2].dt_txt}</p>`;
+ thus.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; ">${Math.round(l[3].main.temp-273)}<p style="margin-top:0px;">.</p></div><p style="margin-left: 40px;">Humidity:${l[3].main.humidity}%</p><p style="margin-left: 40px;">${w3[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[3].dt_txt}</p>`;
+ fri.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; ">${Math.round(l[4].main.temp-273)}<p style="margin-top:0px;">.</p></div><p style="margin-left: 40px;">Humidity:${l[4].main.humidity}%</p><p style="margin-left: 40px;">${w4[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[4].dt_txt}</p>`;
+ sat.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; ">${Math.round(l[5].main.temp-273)}<p style="margin-top:0px;">.</p></div><p style="margin-left: 40px;">Humidity:${l[5].main.humidity}%</p><p style="margin-left: 40px;">${w5[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[5].dt_txt}</p>`;
+ sun.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; ">${Math.round(l[6].main.temp-273)}<p style="margin-top:0px;">.</p></div><p style="margin-left: 40px;">Humidity:${l[6].main.humidity}%</p><p style="margin-left: 40px;">${w6[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[6].dt_txt}</p>`;
+ las.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; ">${Math.round(l[7].main.temp-273)}<p style="margin-top:0px;">.</p></div><p style="margin-left: 40px;">Humidity:${l[7].main.humidity}%</p><p style="margin-left: 40px;">${w7[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[7].dt_txt}</p>`;
+
+ if(w[0].description =='clear sky' && time-3<18){
+    mon.style.backgroundImage=`url('clearskyday.jpg')`;
+    mon.style.backgroundSize=`cover`;
+    console.log('bye');
+}
+if(w[0].description =='clear sky'&& time-3>18||w[0].description =='clear sky'&& time-3<6){
+    mon.style.backgroundImage=`url('clearnight.jpg')`;
+    mon.style.backgroundSize=`cover`;
+    mon.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[0].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[0].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[0].dt_txt}</p>`;
+console.log('hello');
+}
+if(w[0].description =='broken clouds'||w[0].description=='scattered clouds'){
+    mon.style.backgroundImage=`url('scatteredday.jpg')`;
+    mon.style.backgroundSize=`cover`;
+    mon.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center;  ">${Math.round(l[0].main.temp-273)}<p style="margin-top:0px; ">.</p> </div><p style="margin-left: 40px; font-weight:1000; ">Humidity:${l[0].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; ">${w[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[0].dt_txt}</p>`;
+console.log('hello');
+}
+if(w[0].description =='broken clouds'&& time-3>18||w[0].description=='scattered clouds'&&time-3>18||w[0].description =='broken clouds'&& time-3<6||w[0].description=='scattered clouds'&&time-3<6){
+    mon.style.backgroundImage=`url('scatterednight.jpg')`;
+    mon.style.backgroundSize=`cover`;
+    mon.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[0].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[0].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[0].dt_txt}</p>`;
+console.log('hello');
+}
+if(w[0].description=='overcast clouds'||w[0].description== "partly cloudy"){
+    mon.style.backgroundImage=`url('cloudyday.jpg')`;
+    mon.style.backgroundSize=`cover`;
+    mon.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center;  ">${Math.round(l[0].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[0].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[0].dt_txt}</p>`;
+console.log('hello');
+
+}
+if(w[0].description=='overcast clouds' && time-3>18 || w[0].description == "partly cloudy" && time-3>18||w[0].description=='overcast clouds' && time-3<6 || w[0].description == "partly cloudy" && time-3<6){
+    mon.style.backgroundImage=`url('cloudynight.jpg')`;
+    mon.style.backgroundSize=`cover`;
+    mon.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue;  ">${Math.round(l[0].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[0].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w[0].description}</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">time:${l[0].dt_txt}</p>`;
+console.log('bye');
+
+}
+
+if(w1[0].description =='clear sky'){
+    tue.style.backgroundImage=`url('clearskyday.jpg')`;
+    tue.style.backgroundSize=`cover`;
+    console.log('bye');
+}
+if(w1[0].description =='clear sky'&& time>18||w1[0].description=='clear sky' && time<6){
+    tue.style.backgroundImage=`url('clearnight.jpg')`;
+    tue.style.backgroundSize=`cover`;
+    tue.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[1].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[1].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w1[0].description}</p>`;
+console.log('hello');
+}
+if(w1[0].description =='broken clouds'||w1[0].description=='scattered clouds'){
+    tue.style.backgroundImage=`url('scatteredday.jpg')`;
+    tue.style.backgroundSize=`cover`;
+    tue.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center;  ">${Math.round(l[1].main.temp-273)}<p style="margin-top:0px; ">.</p> </div><p style="margin-left: 40px; font-weight:1000; ">Humidity:${l[1].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; ">${w1[0].description}</p>`;
+console.log('hello');
+}
+if(w1[0].description =='broken clouds'&& time>18||w1[0].description=='scattered clouds'&&time>18||w1[0].description =='broken clouds'&& time<6||w1[0].description=='scattered clouds'&&time<6){
+    tue.style.backgroundImage=`url('scatterednight.jpg')`;
+    tue.style.backgroundSize=`cover`;
+    tue.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[1].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[1].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w1[0].description}</p>`;
+console.log('hello');
+}
+if(w2[0].description =='clear sky'){
+    wed.style.backgroundImage=`url('clearskyday.jpg')`;
+    wed.style.backgroundSize=`cover`;
+    console.log('bye');
+}
+if(w2[0].description =='clear sky'&& time+3>18||w2[0].description =='clear sky'&& time+3<6){
+    wed.style.backgroundImage=`url('clearnight.jpg')`;
+    wed.style.backgroundSize=`cover`;
+    wed.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[2].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[2].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w2[0].description}</p>`;
+console.log('hello');
+}
+if(w2[0].description =='broken clouds'||w2[0].description=='scattered clouds'){
+    wed.style.backgroundImage=`url('scatteredday.jpg')`;
+    wed.style.backgroundSize=`cover`;
+    wed.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center;  ">${Math.round(l[2].main.temp-273)}<p style="margin-top:0px; ">.</p> </div><p style="margin-left: 40px; font-weight:1000; ">Humidity:${l[2].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; ">${w2[0].description}</p>`;
+console.log('hello');
+}
+if(w2[0].description =='broken clouds'&& time+3>18||w2[0].description=='scattered clouds'&&time+3>18||w2[0].description =='broken clouds'&& time+3<6||w2[0].description=='scattered clouds'&&time+3<6){
+    wed.style.backgroundImage=`url('scatterednight.jpg')`;
+    wed.style.backgroundSize=`cover`;
+    wed.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[2].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[2].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w2[0].description}</p>`;
+console.log('hello');
+}
+if(w3[0].description =='clear sky'){
+    thus.style.backgroundImage=`url('clearskyday.jpg')`;
+    thus.style.backgroundSize=`cover`;
+    console.log('bye');
+}
+if(w3[0].description =='clear sky'&& time+6>18||w3[0].description =='clear sky'&& time+6<6){
+    thus.style.backgroundImage=`url('clearnight.jpg')`;
+    thus.style.backgroundSize=`cover`;
+    thus.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[3].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[3].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w3[0].description}</p>`;
+console.log('hello');
+}
+if(w3[0].description =='broken clouds'||w3[0].description=='scattered clouds'){
+    thus.style.backgroundImage=`url('scatteredday.jpg')`;
+    thus.style.backgroundSize=`cover`;
+    thus.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center;  ">${Math.round(l[3].main.temp-273)}<p style="margin-top:0px; ">.</p> </div><p style="margin-left: 40px; font-weight:1000; ">Humidity:${l[3].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; ">${w3[0].description}</p>`;
+console.log('hello');
+}
+if(w3[0].description =='broken clouds'&& time+6>18||w3[0].description=='scattered clouds'&&time+6>18||w3[0].description =='broken clouds'&& time+6<6||w3[0].description=='scattered clouds'&&time+6<6){
+    thus.style.backgroundImage=`url('scatterednight.jpg')`;
+    thus.style.backgroundSize=`cover`;
+    thus.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[3].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[3].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w3[0].description}</p>`;
+console.log('hello');
+}
+if(w4[0].description =='clear sky'){
+    fri.style.backgroundImage=`url('clearskyday.jpg')`;
+    fri.style.backgroundSize=`cover`;
+    console.log('bye');
+}
+if(w4[0].description =='clear sky'&& time+9>18||w4[0].description =='clear sky'&& time+9<6){
+    fri.style.backgroundImage=`url('clearnight.jpg')`;
+    fri.style.backgroundSize=`cover`;
+    fri.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[4].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[4].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w4[0].description}</p>`;
+console.log('hello');
+}
+if(w4[0].description =='broken clouds'||w4[0].description=='scattered clouds'){
+    fri.style.backgroundImage=`url('scatteredday.jpg')`;
+    fri.style.backgroundSize=`cover`;
+    fri.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center;  ">${Math.round(l[4].main.temp-273)}<p style="margin-top:0px; ">.</p> </div><p style="margin-left: 40px; font-weight:1000; ">Humidity:${l[4].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; ">${w4[0].description}</p>`;
+console.log('hello');
+}
+if(w4[0].description =='broken clouds'&& time+9>18||w4[0].description=='scattered clouds'&&time+9>18||w4[0].description =='broken clouds'&& time+9<6||w4[0].description=='scattered clouds'&&time+9<6){
+    fri.style.backgroundImage=`url('scatterednight.jpg')`;
+    fri.style.backgroundSize=`cover`;
+    fri.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[4].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[4].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w4[0].description}</p>`;
+console.log('hello');
+}
+if(w5[0].description =='clear sky'){
+    sat.style.backgroundImage=`url('clearskyday.jpg')`;
+    sat.style.backgroundSize=`cover`;
+    console.log('bye');
+}
+if(w5[0].description =='clear sky'&& time+12>18||w5[0].description =='clear sky'&& time+12<6){
+    sat.style.backgroundImage=`url('clearnight.jpg')`;
+    sat.style.backgroundSize=`cover`;
+    sat.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[5].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[5].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w5[0].description}</p>`;
+console.log('hello');
+}
+if(w5[0].description =='broken clouds'||w5[0].description=='scattered clouds'){
+    sat.style.backgroundImage=`url('scatteredday.jpg')`;
+    sat.style.backgroundSize=`cover`;
+    sat.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center;  ">${Math.round(l[5].main.temp-273)}<p style="margin-top:0px; ">.</p> </div><p style="margin-left: 40px; font-weight:1000; ">Humidity:${l[5].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; ">${w5[0].description}</p>`;
+console.log('hello');
+}
+if(w5[0].description =='broken clouds'&& time+12>18||w5[0].description=='scattered clouds'&&time+12>18||w5[0].description =='broken clouds'&& time+12<6||w5[0].description=='scattered clouds'&&time+12<6){
+    sat.style.backgroundImage=`url('scatterednight.jpg')`;
+    sat.style.backgroundSize=`cover`;
+    sat.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[5].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[5].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w5[0].description}</p>`;
+console.log('hello');
+}
+if(w6[0].description =='clear sky'){
+    sun.style.backgroundImage=`url('clearskyday.jpg')`;
+    sun.style.backgroundSize=`cover`;
+    console.log('bye');
+}
+if(w6[0].description =='clear sky'&& time+15>18||w6[0].description =='clear sky'&& time+15<6){
+    sun.style.backgroundImage=`url('clearnight.jpg')`;
+    sun.style.backgroundSize=`cover`;
+    sun.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[6].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[6].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w6[0].description}</p>`;
+console.log('hello');
+}
+if(w6[0].description =='broken clouds'||w6[0].description=='scattered clouds'){
+    sun.style.backgroundImage=`url('scatteredday.jpg')`;
+    sun.style.backgroundSize=`cover`;
+    sun.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center;  ">${Math.round(l[6].main.temp-273)}<p style="margin-top:0px; ">.</p> </div><p style="margin-left: 40px; font-weight:1000; ">Humidity:${l[6].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; ">${w6[0].description}</p>`;
+console.log('hello');
+}
+if(w6[0].description =='broken clouds'&& time+15>18||w6[0].description=='scattered clouds'&&time+15>18||w6[0].description =='broken clouds'&& time+15<6||w6[0].description=='scattered clouds'&&time+15<6){
+    sun.style.backgroundImage=`url('scatterednight.jpg')`;
+    sun.style.backgroundSize=`cover`;
+    sun.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[6].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[6].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w6[0].description}</p>`;
+console.log('hello');
+}
+if(w7[0].description =='clear sky'){
+    las.style.backgroundImage=`url('clearskyday.jpg')`;
+    las.style.backgroundSize=`cover`;
+    console.log('bye');
+}
+if(w7[0].description =='clear sky'&& time+18>18||w7[0].description =='clear sky'&& time+18<6){
+    las.style.backgroundImage=`url('clearnight.jpg')`;
+    las.style.backgroundSize=`cover`;
+    las.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[7].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[7].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w7[0].description}</p>`;
+console.log('hello');
+}
+if(w7[0].description =='broken clouds'||w7[0].description=='scattered clouds'){
+    las.style.backgroundImage=`url('scatteredday.jpg')`;
+    las.style.backgroundSize=`cover`;
+    las.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center;  ">${Math.round(l[7].main.temp-273)}<p style="margin-top:0px; ">.</p> </div><p style="margin-left: 40px; font-weight:1000; ">Humidity:${l[7].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; ">${w7[0].description}</p>`;
+console.log('hello');
+}
+if(w7[0].description =='broken clouds'&& time+18>18||w7[0].description=='scattered clouds'&&time+18>18||w7[0].description =='broken clouds'&& time+18<6||w7[0].description=='scattered clouds'&&time+18<6){
+    las.style.backgroundImage=`url('scatterednight.jpg')`;
+    las.style.backgroundSize=`cover`;
+    las.innerHTML=`<div style="margin-left: 70px; font-size: xx-large;  font-weight: 1000; margin-top:0px; display: flex;  align-items: center; color: aliceblue; ">${Math.round(l[7].main.temp-273)}<p style="margin-top:0px; color: aliceblue;">.</p> </div><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">Humidity:${l[7].main.humidity}%</p><p style="margin-left: 40px; font-weight:1000; color: aliceblue;">${w7[0].description}</p>`;
+console.log('hello');
+}
+
+console.log(l[0].dt_txt,Math.round(l[0].main.temp-273));
+console.log(l[1].dt_txt,Math.round(l[1].main.temp-273));
+console.log(l[2].dt_txt,Math.round(l[2].main.temp-273));
+console.log(l[3].dt_txt,Math.round(l[3].main.temp-273));
+console.log(l[4].dt_txt,Math.round(l[4].main.temp-273));
+console.log(l[5].dt_txt,Math.round(l[5].main.temp-273));
+console.log(l[6].dt_txt,Math.round(l[6].main.temp-273));
+console.log(l[7].dt_txt,Math.round(l[7].main.temp-273));
+       }
+    
+       
+
+    </script>
+</html>
